@@ -1,2 +1,2 @@
-# Cli
-CLI for floatPHP
+# Exceptions
+ Exceptions Component
