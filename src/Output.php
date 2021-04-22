@@ -5,14 +5,14 @@
  * @subpackage: cli Component
  * @version   : 1.1.0
  * @category  : PHP framework
- * @copyright : (c) JIHAD SINNAOUR <mail@jihadsinnaour.com>
+ * @copyright : (c) 2017 - 2021 JIHAD SINNAOUR <mail@jihadsinnaour.com>
  * @link      : https://www.floatphp.com
  * @license   : MIT License
  *
  * This file if a part of FloatPHP Framework
  */
 
-namespace floatPHP\Cli;
+namespace FloatPHP\Cli;
 
 class Output
 {
@@ -43,9 +43,7 @@ class Output
      */
     public function display($message)
     {
-        $this->newline();
         $this->out($message);
-        $this->newline();
         $this->newline();
     }
 }

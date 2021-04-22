@@ -5,17 +5,21 @@
  * @subpackage: cli Component
  * @version   : 1.1.0
  * @category  : PHP framework
- * @copyright : (c) JIHAD SINNAOUR <mail@jihadsinnaour.com>
+ * @copyright : (c) 2017 - 2021 JIHAD SINNAOUR <mail@jihadsinnaour.com>
  * @link      : https://www.floatphp.com
  * @license   : MIT License
  *
  * This file if a part of FloatPHP Framework
  */
 
-namespace floatPHP\Cli;
+namespace FloatPHP\Cli;
 
-class Console
+use FloatPHP\Kernel\Configuration;
+
+class Console extends BuiltIn
 {
+	use Configuration;
+
 	/**
 	 * @access protected
 	 * @var object $output
@@ -30,6 +34,7 @@ class Console
 	 */
     public function __construct()
     {
+    	$this->initConfig();
         $this->output = new Output();
     }
 
@@ -45,13 +50,13 @@ class Console
 
 	/**
 	 * @access public
-	 * @param string $name
+	 * @param string $command
 	 * @param callable $callable
 	 * @return void
 	 */
-    public function registerCommand($name, $callable)
+    public function registerCommand($command, $callable)
     {
-        $this->registry[$name] = $callable;
+        $this->registry[$command] = $callable;
     }
 
 	/**
@@ -69,17 +74,13 @@ class Console
 	 * @param array $argv
 	 * @return void
 	 */
-    public function runCommand($argv = [])
+    public function run($argv = [])
     {
-        $name = 'help';
-        if ( isset($argv[1]) ) {
-            $name = $argv[1];
+        $name = isset($argv[1]) ? $argv[1] : false;
+        if ( ($command = $this->getCommand($name)) ) {
+            call_user_func($command, $argv);
+        } else {
+            $this->getOutput()->display("FloatPHP : Command '{$name}' not found.");
         }
-        $command = $this->getCommand($name);
-        if ($command) {
-            $this->getOutput()->display("FloatPHP Error : Command '{$name}' not found.");
-            exit();
-        }
-        call_user_func($command, $argv);
     }
 }

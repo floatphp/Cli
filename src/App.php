@@ -5,16 +5,16 @@
  * @subpackage: cli Component
  * @version   : 1.1.0
  * @category  : PHP framework
- * @copyright : (c) JIHAD SINNAOUR <mail@jihadsinnaour.com>
+ * @copyright : (c) 2017 - 2021 JIHAD SINNAOUR <mail@jihadsinnaour.com>
  * @link      : https://www.floatphp.com
  * @license   : MIT License
  *
  * This file if a part of FloatPHP Framework
  */
 
-namespace floatPHP\Cli;
+namespace FloatPHP\Cli;
 
-class App extends Console
+class App
 {
     /**
      * @param void
@@ -22,9 +22,14 @@ class App extends Console
      */
     public function __construct()
     {
-        $this->registerCommand('help', function ($argv) use ($this) {
-            $this->getPrinter()->display("usage: minicli hello [ your-name ]");
+        global $argv;
+        $console = new Console();
+        $console->registerCommand('help', function($argv) use($console) {
+            $console->help();
         });
-        $this->runCommand($argv);
+        $console->registerCommand('add-page', function($argv) use($console) {
+            $console->addPage($argv);
+        });
+        $console->run($argv);
     }
 }
