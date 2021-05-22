@@ -25,5 +25,8 @@
     "psr-4" : {
       "FloatPHP\\Cli\\" : "src/"
     }
-  }
+  },
+  "bin": [
+    "bin/floatphp"
+  ]
 }
