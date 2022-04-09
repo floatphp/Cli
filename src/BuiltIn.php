@@ -118,9 +118,8 @@ class BuiltIn
      */
     private function generateController($args)
     {
-        $content = new File(dirname(__FILE__).'/bin/controller');
-        $content->read();
-        $replace = [
+        $content = File::r(dirname(__FILE__).'/bin/controller');
+        $content = Stringify::replaceArray([
             '{slug}'      => $args['slug'], 
             '{name}'      => $args['name'], 
             '{routeName}' => $args['routeName'], 
@@ -129,10 +128,8 @@ class BuiltIn
             '{action}'    => $args['action'], 
             '{parent}'    => $args['parent'], 
             '{params}'    => $args['params']
-        ];
-        $content = Stringify::replaceArray($replace, $content->getContent());
-        $target = new File("{$this->getAppRoot()}/App/Controllers/{$args['name']}Controller.php");
-        $target->write($content);
+        ],$content);
+        File::w("{$this->getAppRoot()}/App/Controllers/{$args['name']}Controller.php",$content);
     }
 
     /**
@@ -157,8 +154,8 @@ class BuiltIn
      */
     private function generateModel($name)
     {
-        $view = new File("{$this->getAppRoot()}/{$this->getViewPath()}{$name}{$this->getViewExtension()}");
-        $view->write("{$name} template");
+        $file = "{$this->getAppRoot()}/{$this->getViewPath()}{$name}{$this->getViewExtension()}";
+        File::w($file,"{$name} template");
     }
 
     /**
@@ -168,8 +165,8 @@ class BuiltIn
      */
     private function generateView($name)
     {
-        $view = new File("{$this->getAppRoot()}/{$this->getViewPath()}{$name}{$this->getViewExtension()}");
-        $view->write("{$name} template");
+        $file = "{$this->getAppRoot()}/{$this->getViewPath()}{$name}{$this->getViewExtension()}";
+        File::w($file,"{$name} template");
     }
 
     /**
