@@ -1,8 +1,8 @@
 {
   "name": "floatphp/cli",
-  "version" : "1.0.0",
+  "version" : "1.0.1",
   "type": "library",
-  "description": "CLI for floatPHP",
+  "description": "FloatPHP CLI Components",
   "keywords": ["floatphp","micro-framework","framework","PSR","ORM","jakiboy"],
   "homepage": "https://www.floatphp.com/",
   "license": "MIT",

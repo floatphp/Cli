@@ -3,9 +3,9 @@
  * @author     : JIHAD SINNAOUR
  * @package    : FloatPHP
  * @subpackage : CLI Component
- * @version    : 1.0.0
+ * @version    : 1.0.1
  * @category   : PHP framework
- * @copyright  : (c) 2017 - 2022 Jihad Sinnaour <mail@jihadsinnaour.com>
+ * @copyright  : (c) 2017 - 2023 Jihad Sinnaour <mail@jihadsinnaour.com>
  * @link       : https://www.floatphp.com
  * @license    : MIT
  *
@@ -64,11 +64,11 @@ class Console extends BuiltIn
 	/**
 	 * @access public
 	 * @param string $command
-	 * @return boolean
+	 * @return bool
 	 */
     public function getCommand($command)
     {
-        return isset($this->registry[$command]) ? $this->registry[$command] : null;
+        return $this->registry[$command] ?? null;
     }
 
 	/**
