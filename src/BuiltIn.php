@@ -3,7 +3,7 @@
  * @author     : JIHAD SINNAOUR
  * @package    : FloatPHP
  * @subpackage : CLI Component
- * @version    : 1.0.1
+ * @version    : 1.0.2
  * @category   : PHP framework
  * @copyright  : (c) 2017 - 2023 Jihad Sinnaour <mail@jihadsinnaour.com>
  * @link       : https://www.floatphp.com
@@ -131,8 +131,9 @@ class BuiltIn
             '{action}'    => $args['action'], 
             '{parent}'    => $args['parent'], 
             '{params}'    => $args['params']
-        ],$content);
-        File::w("{$this->getAppRoot()}/App/Controllers/{$args['name']}Controller.php",$content);
+        ], $content);
+
+        File::w("{$this->getAppRoot()}/App/Controllers/{$args['name']}Controller.php", $content);
     }
 
     /**
@@ -188,8 +189,8 @@ class BuiltIn
         $args['parent'] = Stringify::capitalize($args['parent']);
         $args['method'] = Stringify::uppercase($args['method']);
         if ($args['params']) {
-            $args['params'] = '$'.$args['params'];
-            $args['params'] = Stringify::replace(',',',$',$args['params']);
+            $args['params'] = '$' . $args['params'];
+            $args['params'] = Stringify::replace(',', ',$', $args['params']);
         }
         return $args;
     }

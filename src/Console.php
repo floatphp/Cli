@@ -3,7 +3,7 @@
  * @author     : JIHAD SINNAOUR
  * @package    : FloatPHP
  * @subpackage : CLI Component
- * @version    : 1.0.1
+ * @version    : 1.0.2
  * @category   : PHP framework
  * @copyright  : (c) 2017 - 2023 Jihad Sinnaour <mail@jihadsinnaour.com>
  * @link       : https://www.floatphp.com
@@ -16,12 +16,8 @@ declare(strict_types=1);
 
 namespace FloatPHP\Cli;
 
-use FloatPHP\Kernel\Configuration;
-
 class Console extends BuiltIn
 {
-	use Configuration;
-
 	/**
 	 * @access protected
 	 * @var object $output
@@ -36,7 +32,6 @@ class Console extends BuiltIn
 	 */
     public function __construct()
     {
-    	$this->initConfig();
         $this->output = new Output();
     }
 
@@ -81,6 +76,7 @@ class Console extends BuiltIn
         $name = isset($argv[1]) ? $argv[1] : false;
         if ( ($command = $this->getCommand($name)) ) {
             call_user_func($command, $argv);
+            
         } else {
             $this->getOutput()->display("FloatPHP : Command '{$name}' not found.");
         }
