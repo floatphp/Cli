@@ -1,8 +1,9 @@
 # FloatPHP (CLI)
 
-<img src="https://www.floatphp.com/assets/img/floatphp.png" width="100" alt="Micro PHP framework">
+<img src="https://floatphp.com/assets/img/floatphp.png" width="100" alt="Micro PHP framework">
 
 FloatPHP **CLI Components**.
+This components used to setup CLI application.
 
 ## ⚡ Installing:
 

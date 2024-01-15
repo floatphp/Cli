@@ -1,12 +1,11 @@
 <?php
 /**
- * @author     : JIHAD SINNAOUR
+ * @author     : Jakiboy
  * @package    : FloatPHP
  * @subpackage : CLI Component
- * @version    : 1.0.2
- * @category   : PHP framework
- * @copyright  : (c) 2017 - 2023 Jihad Sinnaour <mail@jihadsinnaour.com>
- * @link       : https://www.floatphp.com
+ * @version    : 1.1.0
+ * @copyright  : (c) 2018 - 2024 Jihad Sinnaour <mail@jihadsinnaour.com>
+ * @link       : https://floatphp.com
  * @license    : MIT
  *
  * This file if a part of FloatPHP Framework.
@@ -27,7 +26,6 @@ class Console extends BuiltIn
     protected $registry = [];
 
 	/**
-	 * @param void
 	 * @return void
 	 */
     public function __construct()
@@ -37,7 +35,6 @@ class Console extends BuiltIn
 
 	/**
 	 * @access public
-	 * @param void
 	 * @return object
 	 */
     public function getOutput()
@@ -59,7 +56,7 @@ class Console extends BuiltIn
 	/**
 	 * @access public
 	 * @param string $command
-	 * @return bool
+	 * @return mixed
 	 */
     public function getCommand($command)
     {
