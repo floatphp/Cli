@@ -3,7 +3,7 @@
  * @author     : Jakiboy
  * @package    : FloatPHP
  * @subpackage : CLI Component
- * @version    : 1.2.x
+ * @version    : 1.3.x
  * @copyright  : (c) 2018 - 2024 Jihad Sinnaour <mail@jihadsinnaour.com>
  * @link       : https://floatphp.com
  * @license    : MIT
@@ -22,7 +22,7 @@ class Output
      * @param string $message
      * @return string
      */
-    public function out($message)
+    public function out($message) : void
     {
         echo $message;
     }
@@ -31,7 +31,7 @@ class Output
      * @access public
      * @return string
      */
-    public function newline()
+    public function newline() : void
     {
         $this->out("\n");
     }
@@ -41,7 +41,7 @@ class Output
      * @param string $message
      * @return void
      */
-    public function display($message)
+    public function display($message) : void
     {
         $this->out($message);
         $this->newline();

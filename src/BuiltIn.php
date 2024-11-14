@@ -3,7 +3,7 @@
  * @author     : Jakiboy
  * @package    : FloatPHP
  * @subpackage : CLI Component
- * @version    : 1.2.x
+ * @version    : 1.3.x
  * @copyright  : (c) 2018 - 2024 Jihad Sinnaour <mail@jihadsinnaour.com>
  * @link       : https://floatphp.com
  * @license    : MIT
@@ -15,9 +15,7 @@ declare(strict_types=1);
 
 namespace FloatPHP\Cli;
 
-use FloatPHP\Classes\Filesystem\{
-    File, Stringify
-};
+use FloatPHP\Classes\Filesystem\{File, Stringify};
 
 class BuiltIn
 {
@@ -25,7 +23,7 @@ class BuiltIn
      * @access public
      * @return string
      */
-    public function help()
+    public function help() : never
     {
         $this->getOutput()->display('add-page [name] [route] [action] [params] [parent] [method]');
         $this->getOutput()->display('add-model [name]');
@@ -38,7 +36,7 @@ class BuiltIn
      * @param array $args
      * @return string
      */
-    public function addPage($args)
+    public function addPage($args) : void
     {
         // Parse name parameter
         if ( !($name = $this->parseVars($args)) ) {
@@ -73,7 +71,7 @@ class BuiltIn
         // Parse method parameter
         $method = $this->parseVars($args, 7) ? $this->parseVars($args, 7) : 'GET';
         $method = Stringify::uppercase($method);
-        $methods = ['GET','HEAD','POST','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH'];
+        $methods = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH'];
         if ( !in_array($method, $methods) && !Stringify::contains($method, '|') ) {
             $this->getOutput()->display("FloatPHP : Command 'add-page' require valid 'method' parameter");
             $this->getOutput()->display("Use : (GET, POST, PATCH, DELETE, GET|POST)");
@@ -82,10 +80,10 @@ class BuiltIn
 
         $vars = [
             'name'   => $name,
-            'route'  => $route, 
+            'route'  => $route,
             'action' => $action,
             'params' => $params,
-            'parent' => $parent, 
+            'parent' => $parent,
             'method' => $method
         ];
 
@@ -100,7 +98,7 @@ class BuiltIn
      * @param array $args
      * @return string
      */
-    public function addModel($args)
+    public function addModel($args) : void
     {
         // Parse name parameter
         if ( !($name = $this->parseVars($args)) ) {
@@ -117,17 +115,17 @@ class BuiltIn
      * @param array $args
      * @return void
      */
-    private function generateController($args)
+    private function generateController($args) : void
     {
-        $content = File::r(dirname(__FILE__).'/bin/controller');
+        $content = File::r(dirname(__FILE__) . '/bin/controller');
         $content = Stringify::replaceArray([
-            '{slug}'      => $args['slug'], 
-            '{name}'      => $args['name'], 
-            '{routeName}' => $args['routeName'], 
-            '{route}'     => $args['route'], 
-            '{method}'    => $args['method'], 
-            '{action}'    => $args['action'], 
-            '{parent}'    => $args['parent'], 
+            '{slug}'      => $args['slug'],
+            '{name}'      => $args['name'],
+            '{routeName}' => $args['routeName'],
+            '{route}'     => $args['route'],
+            '{method}'    => $args['method'],
+            '{action}'    => $args['action'],
+            '{parent}'    => $args['parent'],
             '{params}'    => $args['params']
         ], $content);
 
@@ -139,7 +137,7 @@ class BuiltIn
      * @param array $args
      * @return void
      */
-    private function generateRoute($args)
+    private function generateRoute($args) : void
     {
         $this->addRoute([
             'method'     => $args['method'],
@@ -157,7 +155,7 @@ class BuiltIn
     private function generateModel($name)
     {
         $file = "{$this->getAppRoot()}/{$this->getViewPath()}{$name}{$this->getViewExtension()}";
-        File::w($file,"{$name} template");
+        File::w($file, "{$name} template");
     }
 
     /**
@@ -165,10 +163,10 @@ class BuiltIn
      * @param array $args
      * @return void
      */
-    private function generateView($name)
+    private function generateView($name) : void
     {
         $file = "{$this->getAppRoot()}/{$this->getViewPath()}{$name}{$this->getViewExtension()}";
-        File::w($file,"{$name} template");
+        File::w($file, "{$name} template");
     }
 
     /**
@@ -176,7 +174,7 @@ class BuiltIn
      * @param array $args
      * @return array
      */
-    private function buildVars($args)
+    private function buildVars($args) : array
     {
         $args['slug'] = Stringify::lowercase(Stringify::numberStrip($args['name']));
         $args['name'] = Stringify::capitalize($args['slug']);
@@ -186,7 +184,7 @@ class BuiltIn
         $args['action'] = Stringify::lowercase($args['action']);
         $args['parent'] = Stringify::capitalize($args['parent']);
         $args['method'] = Stringify::uppercase($args['method']);
-        if ($args['params']) {
+        if ( $args['params'] ) {
             $args['params'] = '$' . $args['params'];
             $args['params'] = Stringify::replace(',', ',$', $args['params']);
         }
@@ -199,7 +197,7 @@ class BuiltIn
      * @param int $pos
      * @return mixed
      */
-    private function parseVars($args, $pos = 2)
+    private function parseVars($args, $pos = 2) : mixed
     {
         return $args[$pos] ?? false;
     }

@@ -3,7 +3,7 @@
  * @author     : Jakiboy
  * @package    : FloatPHP
  * @subpackage : CLI Component
- * @version    : 1.2.x
+ * @version    : 1.3.x
  * @copyright  : (c) 2018 - 2024 Jihad Sinnaour <mail@jihadsinnaour.com>
  * @link       : https://floatphp.com
  * @license    : MIT
@@ -22,25 +22,25 @@ class Console extends BuiltIn
 	 * @var object $output
 	 * @var array $registry
 	 */
-    protected $output;
-    protected $registry = [];
+	protected $output;
+	protected $registry = [];
 
 	/**
 	 * @return void
 	 */
-    public function __construct()
-    {
-        $this->output = new Output();
-    }
+	public function __construct()
+	{
+		$this->output = new Output();
+	}
 
 	/**
 	 * @access public
 	 * @return object
 	 */
-    public function getOutput()
-    {
-        return $this->output;
-    }
+	public function getOutput() : object
+	{
+		return $this->output;
+	}
 
 	/**
 	 * @access public
@@ -48,34 +48,34 @@ class Console extends BuiltIn
 	 * @param callable $callable
 	 * @return void
 	 */
-    public function registerCommand($command, $callable)
-    {
-        $this->registry[$command] = $callable;
-    }
+	public function registerCommand($command, $callable) : void
+	{
+		$this->registry[$command] = $callable;
+	}
 
 	/**
 	 * @access public
 	 * @param string $command
 	 * @return mixed
 	 */
-    public function getCommand($command)
-    {
-        return $this->registry[$command] ?? null;
-    }
+	public function getCommand($command) : mixed
+	{
+		return $this->registry[$command] ?? null;
+	}
 
 	/**
 	 * @access public
 	 * @param array $argv
 	 * @return void
 	 */
-    public function run($argv = [])
-    {
-        $name = isset($argv[1]) ? $argv[1] : false;
-        if ( ($command = $this->getCommand($name)) ) {
-            call_user_func($command, $argv);
-            
-        } else {
-            $this->getOutput()->display("FloatPHP : Command '{$name}' not found.");
-        }
-    }
+	public function run($argv = []) : void
+	{
+		$name = isset($argv[1]) ? $argv[1] : false;
+		if ( ($command = $this->getCommand($name)) ) {
+			call_user_func($command, $argv);
+
+		} else {
+			$this->getOutput()->display("FloatPHP : Command '{$name}' not found.");
+		}
+	}
 }
