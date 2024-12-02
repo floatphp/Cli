@@ -21,7 +21,7 @@ class BuiltIn
 {
     /**
      * @access public
-     * @return string
+     * @return never
      */
     public function help() : never
     {
@@ -34,9 +34,9 @@ class BuiltIn
     /**
      * @access public
      * @param array $args
-     * @return string
+     * @return never
      */
-    public function addPage($args) : void
+    public function addPage($args) : never
     {
         // Parse name parameter
         if ( !($name = $this->parseVars($args)) ) {
@@ -96,9 +96,9 @@ class BuiltIn
     /**
      * @access public
      * @param array $args
-     * @return string
+     * @return never
      */
-    public function addModel($args) : void
+    public function addModel($args) : never
     {
         // Parse name parameter
         if ( !($name = $this->parseVars($args)) ) {
@@ -113,9 +113,9 @@ class BuiltIn
     /**
      * @access private
      * @param array $args
-     * @return void
+     * @return never
      */
-    private function generateController($args) : void
+    private function generateController($args) : never
     {
         $content = File::r(dirname(__FILE__) . '/bin/controller');
         $content = Stringify::replaceArray([
@@ -135,9 +135,9 @@ class BuiltIn
     /**
      * @access private
      * @param array $args
-     * @return void
+     * @return never
      */
-    private function generateRoute($args) : void
+    private function generateRoute($args) : never
     {
         $this->addRoute([
             'method'     => $args['method'],
@@ -150,9 +150,9 @@ class BuiltIn
     /**
      * @access private
      * @param array $args
-     * @return void
+     * @return never
      */
-    private function generateModel($name)
+    private function generateModel($name) : never
     {
         $file = "{$this->getAppRoot()}/{$this->getViewPath()}{$name}{$this->getViewExtension()}";
         File::w($file, "{$name} template");
@@ -161,9 +161,9 @@ class BuiltIn
     /**
      * @access private
      * @param array $args
-     * @return void
+     * @return never
      */
-    private function generateView($name) : void
+    private function generateView($name) : never
     {
         $file = "{$this->getAppRoot()}/{$this->getViewPath()}{$name}{$this->getViewExtension()}";
         File::w($file, "{$name} template");
