@@ -1,6 +1,6 @@
 {
   "name": "floatphp/cli",
-  "version" : "1.3.2",
+  "version" : "1.3.3",
   "type": "library",
   "description": "FloatPHP CLI Components",
   "keywords": ["floatphp","micro-framework","framework","PSR","ORM","jakiboy"],
